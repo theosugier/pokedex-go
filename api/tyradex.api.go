@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"net/http"
 	"time"
 
@@ -28,5 +29,14 @@ func fetch(url string, cible any) error {
 	}
 	defer resp.Body.Close() // je referme la réponse à la fin
 
-	return nil
+	// je regarde le code avant d'ouvrir
+	if resp.StatusCode == http.StatusNotFound {
+		return models.ErrNotFound
+	}
+	if resp.StatusCode != http.StatusOK {
+		return models.ErrUnavailable
+	}
+
+	// je range le JSON dans la boîte
+	return json.NewDecoder(resp.Body).Decode(cible)
 }
