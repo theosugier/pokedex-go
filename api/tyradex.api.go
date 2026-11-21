@@ -40,3 +40,9 @@ func fetch(url string, cible any) error {
 	// je range le JSON dans la boîte
 	return json.NewDecoder(resp.Body).Decode(cible)
 }
+
+func GetAllPokemon() ([]models.Pokemon, error) {
+	var liste []models.Pokemon
+	err := fetch(baseURL+"/pokemon", &liste)
+	return liste, err
+}
