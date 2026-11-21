@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -45,4 +46,16 @@ func GetAllPokemon() ([]models.Pokemon, error) {
 	var liste []models.Pokemon
 	err := fetch(baseURL+"/pokemon", &liste)
 	return liste, err
+}
+
+func GetPokemon(id int) (models.Pokemon, error) {
+	var p models.Pokemon
+	err := fetch(fmt.Sprintf("%s/pokemon/%d", baseURL, id), &p)
+	if err != nil {
+		return p, err
+	}
+	if p.Numero == 0 {
+		return p, models.ErrNotFound
+	}
+	return p, nil
 }
