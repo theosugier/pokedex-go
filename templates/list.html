@@ -7,6 +7,18 @@
 </head>
 <body>
   <h1>Pokédex</h1>
+  <ul class="liste">
+    {{range .Pokemons}}
+    <li>
+      <a href="/pokemon/{{.Numero}}">
+        <img src="{{.Sprites.Image}}" alt="{{.Nom.Nom}}">
+        <span>n°{{.Numero}} {{.Nom.Nom}}</span>
+      </a>
+    </li>
+    {{else}}
+    <li>Aucun Pokémon à afficher.</li>
+    {{end}}
+  </ul>
 
   <footer>Données fournies par Tyradex (https://tyradex.app)</footer>
 </body>
