@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{{.Nom.Nom}} - Pokédex</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <h1>n°{{.Numero}} {{.Nom.Nom}}</h1>
+  <a href="/pokemon">Retour à la liste</a>
+  <img src="{{.Sprites.Image}}" alt="{{.Nom.Nom}}">
+  <p>{{.Categorie}}</p>
+  <ul class="types">
+    {{range .Types}}
+    <li><img src="{{.Icone}}" alt="{{.Nom}}"> {{.Nom}}</li>
+    {{end}}
+  </ul>
+  <footer>Données fournies par Tyradex (https://tyradex.app)</footer>
+</body>
+</html>
