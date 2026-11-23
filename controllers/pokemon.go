@@ -11,12 +11,13 @@ import (
 )
 
 func ListePokemon(w http.ResponseWriter, r *http.Request) {
-	liste, err := services.GetAllPokemon()
+	recherche := r.URL.Query().Get("nom")
+	liste, err := services.RechercherPokemon(recherche)
 	if err != nil {
 		afficherErreur(w, err)
 		return
 	}
-	donnees := map[string]any{"Pokemons": liste}             // je range la liste avk nom "Pokemons" pour la page
+	donnees := map[string]any{"Pokemons": liste, "Recherche": recherche}             // je range la liste avk nom "Pokemons" pour la page
 	helpers.Afficher(w, "list.html", http.StatusOK, donnees) // je remplis list.html avec la liste & jl'envoie au visiteur
 }
 
