@@ -23,8 +23,7 @@ func ListePokemon(w http.ResponseWriter, r *http.Request) {
 func FichePokemon(w http.ResponseWriter, r *http.Request) {
 	p, err := services.GetPokemon(r.PathValue("id"))
 	if err != nil {
-		log.Println("erreur fiche :", err)
-		http.Error(w, "Impossible d'afficher ce Pokémon.", http.StatusNotFound)
+		afficherErreur(w, err)
 		return
 	}
 	helpers.Afficher(w, "pokemon.html", http.StatusOK, p)
