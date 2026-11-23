@@ -7,6 +7,10 @@
 </head>
 <body>
   <h1>Pokédex</h1>
+  <form action="/pokemon" method="get">
+    <input type="text" name="nom" value="{{.Recherche}}" placeholder="Nom du Pokémon">
+    <button type="submit">Rechercher</button>
+  </form>
   <ul class="liste">
     {{range .Pokemons}}
     <li>
