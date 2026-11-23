@@ -2,6 +2,7 @@ package services
 
 import (
 	"strconv"
+	"strings"
 
 	"pokedex/api"
 	"pokedex/models"
@@ -27,4 +28,22 @@ func GetPokemon(idTexte string) (models.Pokemon, error) {
 		return models.Pokemon{}, models.ErrBadRequest
 	}
 	return api.GetPokemon(id)
+}
+
+func RechercherPokemon(nom string) ([]models.Pokemon, error) {
+	liste, err := GetAllPokemon()
+	if err != nil {
+		return nil, err
+	}
+	nom = strings.ToLower(strings.TrimSpace(nom))
+	if nom == "" {
+		return liste, nil
+	}
+	var trouves []models.Pokemon
+	for _, p := range liste {
+		if strings.Contains(strings.ToLower(p.Nom.Nom), nom) {
+			trouves = append(trouves, p)
+		}
+	}
+	return trouves, nil
 }
