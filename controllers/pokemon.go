@@ -13,8 +13,7 @@ import (
 func ListePokemon(w http.ResponseWriter, r *http.Request) {
 	liste, err := services.GetAllPokemon()
 	if err != nil {
-		log.Println("erreur liste :", err)
-		http.Error(w, "Service indisponible.", http.StatusServiceUnavailable)
+		afficherErreur(w, err)
 		return
 	}
 	donnees := map[string]any{"Pokemons": liste}             // je range la liste avk nom "Pokemons" pour la page
