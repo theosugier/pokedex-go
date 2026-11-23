@@ -43,3 +43,8 @@ func afficherErreur(w http.ResponseWriter, err error) {
 	donnees := map[string]any{"Code": code, "Message": message}
 	helpers.Afficher(w, "error.html", code, donnees)
 }
+
+func PageInconnue(w http.ResponseWriter, r *http.Request) {
+	donnees := map[string]any{"Code": http.StatusNotFound, "Message": "Cette page n'existe pas."}
+	helpers.Afficher(w, "error.html", http.StatusNotFound, donnees)
+}
