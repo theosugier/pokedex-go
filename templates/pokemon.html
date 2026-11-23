@@ -5,8 +5,8 @@
   <title>{{.Nom.Nom}} - Pokédex</title>
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body>
-  <h1>n°{{.Numero}} {{.Nom.Nom}}</h1>
+<body class="{{with .Types}}{{with index . 0}}type-{{.Nom}}{{end}}{{end}}">
+  <h1>{{printf "#%03d" .Numero}} {{.Nom.Nom}}</h1>
   <a href="/pokemon">Retour à la liste</a>
   <img src="{{.Sprites.Image}}" alt="{{.Nom.Nom}}">
   <p>{{.Categorie}}</p>

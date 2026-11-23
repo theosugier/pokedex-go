@@ -14,9 +14,10 @@
   <ul class="liste">
     {{range .Pokemons}}
     <li>
-      <a href="/pokemon/{{.Numero}}">
+      <a href="/pokemon/{{.Numero}}" class="{{with .Types}}{{with index . 0}}type-{{.Nom}}{{end}}{{end}}">
         <img src="{{.Sprites.Image}}" alt="{{.Nom.Nom}}">
-        <span>n°{{.Numero}} {{.Nom.Nom}}</span>
+        <small>{{printf "#%03d" .Numero}}</small>
+        <span>{{.Nom.Nom}}</span>
       </a>
     </li>
     {{else}}
