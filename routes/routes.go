@@ -12,5 +12,6 @@ func Routeur() *http.ServeMux {
 	mux.HandleFunc("GET /pokemon/{id}", controllers.FichePokemon)
 	mux.Handle("GET /{$}", http.RedirectHandler("/pokemon", http.StatusMovedPermanently))
 	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("assets"))))
+	mux.HandleFunc("/", controllers.PageInconnue)
 	return mux
 }
