@@ -20,7 +20,11 @@
       </a>
     </li>
     {{else}}
+    {{if .Recherche}}
+    <li>Aucun Pokémon ne correspond à « {{.Recherche}} ».</li>
+    {{else}}
     <li>Aucun Pokémon à afficher.</li>
+    {{end}}
     {{end}}
   </ul>
 
