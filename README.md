@@ -33,3 +33,7 @@ Puis ouvrir http://localhost:8080 dans le navigateur.
 ## Source des données
 
 Les données viennent de l'API Tyradex : https://tyradex.app
+
+## Utilisation de l'IA
+
+Tout le style du site (le fichier `assets/css/style.css`) a été fait avec une IA, comme le prof l'a autorisé.
