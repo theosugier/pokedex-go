@@ -1,10 +1,12 @@
 package controllers
 
 import (
+	"errors"
 	"log"
 	"net/http"
 
 	"pokedex/helpers"
+	"pokedex/models"
 	"pokedex/services"
 )
 
@@ -27,4 +29,19 @@ func FichePokemon(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	helpers.Afficher(w, "pokemon.html", http.StatusOK, p)
+}
+
+func afficherErreur(w http.ResponseWriter, err error) {
+	log.Println("erreur :", err)
+	code := http.StatusServiceUnavailable
+	message := "Service momentanément indisponible."
+	if errors.Is(err, models.ErrBadRequest) {
+		code = http.StatusBadRequest
+		message = "Numéro de Pokémon invalide."
+	} else if errors.Is(err, models.ErrNotFound) {
+		code = http.StatusNotFound
+		message = "Ce Pokémon n'existe pas."
+	}
+	donnees := map[string]any{"Code": code, "Message": message}
+	helpers.Afficher(w, "error.html", code, donnees)
 }
